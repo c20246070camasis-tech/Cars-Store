@@ -1,10 +1,19 @@
 gsap.registerPlugin(ScrollTrigger);
 
 const darkModeToggle = document.querySelector("#darkModeToggle");
-darkModeToggle.addEventListener("click", () => {
-    const isDark = document.documentElement.classList.toggle("dark");
+
+function updateThemeLabel() {
+    const isDark = document.documentElement.classList.contains("dark");
     darkModeToggle.textContent = isDark ? "Light mode" : "Dark mode";
+}
+
+darkModeToggle.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.contains("dark");
+    document.documentElement.classList.toggle("dark", !isDark);
+    updateThemeLabel();
 });
+
+updateThemeLabel();
 
 const intro = gsap.timeline({
     paused: true,
@@ -75,6 +84,7 @@ scrollMotion.add("(prefers-reduced-motion: no-preference)", () => {
             start: "top top",
             end: "bottom bottom",
             scrub: true
+           
         }
     });
 });
